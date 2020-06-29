@@ -1,0 +1,9 @@
+<div *ngFor = "let item of items$ | async">
+	<h4>name: {{item.job}}</h4>
+	<p>id: {{item.id}}</p>
+	<p>status: {{item.status}}</p>
+	<button (click)="update(item.id, 'done')">Finish</button>
+
+</div>
+
+
