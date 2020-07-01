@@ -3,7 +3,7 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Observable, from } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { map , mergeMap, switchMap } from 'rxjs/operators';
 
 
@@ -27,10 +27,10 @@ export class ListEffects {
 		}).stateChanges()
 	}),
 	mergeMap(actions => { //actions [{type: added, payload: data},...]
-		console.log(actions)
+		//console.log(actions)
 		return actions}),
 	map(action => {
-		console.log(action.payload.doc.data() as [])
+		//console.log(action.payload.doc.data() as [])
 		return {
 			type: `[task] ${action.type}`,
 			payload: {
@@ -49,9 +49,29 @@ export class ListEffects {
 	ofType(ListActions.UPDATE),
 	map((action: ListActions.Update) => action),
 	switchMap(data => {
+		console.log(data)
 		const ref = this.db.doc(`tasks/${data.id}`)
 		return from(ref.update(data.changes))
 	}),
 	map(() => new ListActions.Success())
 	)
+	
+	
+	@Effect()
+	addtask: Observable<Action> = this.actions.pipe(
+	ofType(ListActions.ADDTASK),
+	map((action: ListActions.AddTask) => action),
+	switchMap(data => {
+		console.log(data)
+		this.db.collection(`tasks`).doc(data.payload.taskId).set({
+			id: data.payload.taskId,
+			job: data.payload.task,
+			status: "no"
+		})
+		return of(data)
+	}),
+	map(() => new ListActions.Success())
+	
+	);
+	
 }

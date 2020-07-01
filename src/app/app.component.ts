@@ -15,6 +15,9 @@ import * as fromTask from './list.reducer';
 export class AppComponent {
 	
 	items$ : Observable<any>;
+	
+	newtask : string
+	newid : number
 
 	
 
@@ -30,6 +33,14 @@ export class AppComponent {
 		this.store.dispatch( new ListActions.Query() )
 	}
 
+
+//Add task Function 
+
+	addtask(task,taskId) {
+		this.store.dispatch(new ListActions.AddTask({task,taskId}))
+		this.newtask = ''
+		this.newid = undefined
+	}
 
 
 

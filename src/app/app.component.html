@@ -1,7 +1,16 @@
+<div class = "space">
+	<p>Task Name</p><input [(ngModel)]= "newtask" />
+</div>
+
+<div class = "space">
+<p>Task Id</p><input class = "rightmargin"[(ngModel)]= "newid" />
+<button (click) = "addtask(newtask,newid)">Add New Task</button>
+</div>
+
 <div *ngFor = "let item of items$ | async">
-	<h4>name: {{item.job}}</h4>
-	<p>id: {{item.id}}</p>
-	<p>status: {{item.status}}</p>
+	<h4>Name: {{item.job}}</h4>
+	<p>Id: {{item.id}}</p>
+	<p>Status: {{item.status}}</p>
 	<button (click)="update(item.id, 'done')">Finish</button>
 
 </div>

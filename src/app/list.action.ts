@@ -7,6 +7,7 @@ export const QUERY = '[task] Query List'
 export const UPDATE = '[task] Update'
 export const SUCCESS = '[task] Success'
 export const MODIFIED = '[task] modified'
+export const ADDTASK = '[task] Add Task'
 
 
 
@@ -49,6 +50,14 @@ export class Success implements Action {
 	readonly type = SUCCESS;
 }
 
+export class AddTask implements Action {
+	readonly type = ADDTASK;
+	
+	constructor(public payload: any){}
+	
+	
+}
+
 
 
 export type All
@@ -57,4 +66,5 @@ export type All
 	| Modified
 	| Update
 	| Query
-	| Success;
+	| Success
+	| AddTask;

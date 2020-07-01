@@ -2,4 +2,10 @@
     display: block;
     padding: 5px; 
     text-align: justify;
+	border-bottom: 1px solid black
 }
+
+.rightmargin{
+	margin-right: 15px;
+}
+
